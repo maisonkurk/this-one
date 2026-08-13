@@ -308,6 +308,28 @@ h2{font-size:clamp(2.4rem,6vw,4.8rem);margin-bottom:18px}
     0%,100%{transform:translateY(0) rotate(-3deg)}
     50%{transform:translateY(-10px) rotate(3deg)}
 }
+.big-candy{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    font-size:clamp(4rem,11vw,7rem);
+    line-height:1;
+    margin-bottom:28px;
+    filter:drop-shadow(0 8px 14px rgba(0,0,0,.12));
+    animation:candyFloat 3s ease-in-out infinite;
+}
+.big-candy span:nth-child(1){transform:rotate(-12deg) translateY(8px)}
+.big-candy span:nth-child(2){transform:rotate(2deg) scale(1.15)}
+.big-candy span:nth-child(3){transform:rotate(12deg) translateY(8px)}
+@keyframes candyFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-9px)}
+}
+.personal-cube{
+    color:initial;
+}
+
 .personal-cubes{
     display:flex;
     flex-wrap:wrap;
@@ -482,17 +504,17 @@ img{max-width:100%}
 
 <section id="cubes" class="screen">
     <div class="content cubes-content">
-        <div class="big-heart" aria-hidden="true">♥</div>
+        <div class="big-candy" aria-hidden="true"><span>🍬</span><span>🍬</span><span>🍬</span></div>
         <div class="eyebrow">A DIGITAL ENVELOPE</div>
         <h2>Pick a Sugar Cube.</h2>
         <p class="intro-text">There are a few things I wanted you to know.</p>
 
         <div class="personal-cubes">
-            <button class="personal-cube" data-message="I really like the way you make ordinary days feel different.">♥</button>
-            <button class="personal-cube" data-message="You are one of those people I am genuinely glad I met.">♥</button>
-            <button class="personal-cube" data-message="I hope you know that your presence matters to me.">♥</button>
-            <button class="personal-cube" data-message="Some memories are small, but somehow they stay with you.">♥</button>
-            <button class="personal-cube" data-message="I made an entire website because apparently one message wasn't enough.">♥</button>
+            <button class="personal-cube" data-message="I really like the way you make ordinary days feel different.">🍬</button>
+            <button class="personal-cube" data-message="You are one of those people I am genuinely glad I met.">🍬</button>
+            <button class="personal-cube" data-message="I hope you know that your presence matters to me.">🍬</button>
+            <button class="personal-cube" data-message="Some memories are small, but somehow they stay with you.">🍬</button>
+            <button class="personal-cube" data-message="I made an entire website because apparently one message wasn't enough.">🍬</button>
         </div>
 
         <div id="cubeReveal">Click one.</div>
