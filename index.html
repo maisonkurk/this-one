@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111111">
-<link rel="icon" href="images/favicon.png">
+
 <title>For You · Aziz</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
@@ -28,10 +28,10 @@ html,body{
 
 body{
     overflow-x:hidden;
-    cursor:url('./images/pointer.png'),auto;
+    cursor:auto;
 }
 
-button,a{cursor:url('./images/pointer.png'),pointer}
+button,a{cursor:pointer}
 
 #starfield{
     position:fixed;
@@ -304,32 +304,6 @@ h2{font-size:clamp(2.4rem,6vw,4.8rem);margin-bottom:18px}
     animation:heartFloat 3s ease-in-out infinite;
     margin-bottom:28px;
 }
-.big-candy{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:8px;
-    font-size:clamp(4rem,11vw,7rem);
-    line-height:1;
-    margin-bottom:28px;
-    filter:drop-shadow(0 8px 14px rgba(0,0,0,.12));
-    animation:candyFloat 3s ease-in-out infinite;
-}
-.big-candy span:nth-child(1){transform:rotate(-12deg) translateY(8px)}
-.big-candy span:nth-child(2){transform:rotate(2deg) scale(1.15)}
-.big-candy span:nth-child(3){transform:rotate(12deg) translateY(8px)}
-@keyframes candyFloat{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-9px)}
-}
-.personal-cube{
-    color:initial;
-    font-size:2.15rem;
-}
-.personal-cube:hover{
-    filter:drop-shadow(0 5px 8px rgba(0,0,0,.1));
-}
-
 @keyframes heartFloat{
     0%,100%{transform:translateY(0) rotate(-3deg)}
     50%{transform:translateY(-10px) rotate(3deg)}
@@ -348,7 +322,7 @@ h2{font-size:clamp(2.4rem,6vw,4.8rem);margin-bottom:18px}
     height:78px;
     border-radius:18px;
     box-shadow:0 10px 25px rgba(0,0,0,.08);
-    color:initial;
+    color:var(--blue);
     font-size:2.4rem;
     cursor:pointer;
     transition:.35s;
@@ -413,6 +387,20 @@ footer{
 #home.screen.active,#memories.screen.active,#cubes.screen.active{display:flex}
 img{max-width:100%}
 
+
+/* Eleven-photo memory wall */
+.memory-grid .memory-card:nth-child(11) {
+    grid-column: 1 / -1;
+    max-width: 48%;
+    justify-self: center;
+}
+@media(max-width:700px){
+    .memory-grid .memory-card:nth-child(11){
+        grid-column:auto;
+        max-width:none;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -447,7 +435,7 @@ img{max-width:100%}
 <section id="home" class="screen active">
     <div class="content home-content">
         <div class="hero-photo photo-frame">
-            <img src="images/photo1.svg" alt="Main photo placeholder">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDE8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Main photo placeholder">
             <span class="photo-number">01</span>
         </div>
 
@@ -475,32 +463,36 @@ img{max-width:100%}
     <div class="content">
         <div class="eyebrow">LITTLE THINGS I REMEMBER</div>
         <h2>Moments worth keeping.</h2>
-        <p class="intro-text">Seven little places for seven photos.</p>
+        <p class="intro-text">Eleven little places for eleven photos.</p>
 
         <div class="memory-grid">
-            <figure class="memory-card"><div class="photo-frame"><img src="images/photo2.svg" alt="Photo 2 placeholder"></div><figcaption>one of those little moments.</figcaption></figure>
-            <figure class="memory-card"><div class="photo-frame"><img src="images/photo3.svg" alt="Photo 3 placeholder"></div><figcaption>something worth keeping.</figcaption></figure>
-            <figure class="memory-card"><div class="photo-frame"><img src="images/photo4.svg" alt="Photo 4 placeholder"></div><figcaption>another memory.</figcaption></figure>
-            <figure class="memory-card"><div class="photo-frame"><img src="images/photo5.svg" alt="Photo 5 placeholder"></div><figcaption>this one makes me smile.</figcaption></figure>
-            <figure class="memory-card"><div class="photo-frame"><img src="images/photo6.svg" alt="Photo 6 placeholder"></div><figcaption>just because.</figcaption></figure>
-            <figure class="memory-card"><div class="photo-frame"><img src="images/photo7.svg" alt="Photo 7 placeholder"></div><figcaption>one more for the collection.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDI8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Photo 2 placeholder"></div><figcaption>one of those little moments.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDM8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Photo 3 placeholder"></div><figcaption>something worth keeping.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDQ8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Photo 4 placeholder"></div><figcaption>another memory.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDU8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Photo 5 placeholder"></div><figcaption>this one makes me smile.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDY8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Photo 6 placeholder"></div><figcaption>just because.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDc8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Photo 7 placeholder"></div><figcaption>one more for the collection.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDg8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Photo 8 placeholder"></div><figcaption>another little memory.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDk8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Photo 9 placeholder"></div><figcaption>one I'll keep.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDEwPC90ZXh0Pgo8dGV4dCB4PSI0MDAiIHk9IjUyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOTk5Ij5yZXBsYWNlIHdpdGggeW91ciBpbWFnZTwvdGV4dD4KPC9zdmc+" alt="Photo 10 placeholder"></div><figcaption>and one more.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDExPC90ZXh0Pgo8dGV4dCB4PSI0MDAiIHk9IjUyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOTk5Ij5yZXBsYWNlIHdpdGggeW91ciBpbWFnZTwvdGV4dD4KPC9zdmc+" alt="Photo 11 placeholder"></div><figcaption>one last little memory.</figcaption></figure>
         </div>
     </div>
 </section>
 
 <section id="cubes" class="screen">
     <div class="content cubes-content">
-        <div class="big-candy" aria-hidden="true"><span>🍬</span><span>🍬</span><span>🍬</span></div>
+        <div class="big-heart" aria-hidden="true">♥</div>
         <div class="eyebrow">A DIGITAL ENVELOPE</div>
         <h2>Pick a Sugar Cube.</h2>
         <p class="intro-text">There are a few things I wanted you to know.</p>
 
         <div class="personal-cubes">
-            <button class="personal-cube" data-message="I really like the way you make ordinary days feel different.">🍬</button>
-            <button class="personal-cube" data-message="You are one of those people I am genuinely glad I met.">🍬</button>
-            <button class="personal-cube" data-message="I hope you know that your presence matters to me.">🍬</button>
-            <button class="personal-cube" data-message="Some memories are small, but somehow they stay with you.">🍬</button>
-            <button class="personal-cube" data-message="I made an entire website because apparently one message wasn't enough.">🍬</button>
+            <button class="personal-cube" data-message="I really like the way you make ordinary days feel different.">♥</button>
+            <button class="personal-cube" data-message="You are one of those people I am genuinely glad I met.">♥</button>
+            <button class="personal-cube" data-message="I hope you know that your presence matters to me.">♥</button>
+            <button class="personal-cube" data-message="Some memories are small, but somehow they stay with you.">♥</button>
+            <button class="personal-cube" data-message="I made an entire website because apparently one message wasn't enough.">♥</button>
         </div>
 
         <div id="cubeReveal">Click one.</div>
