@@ -102,6 +102,14 @@ button,a{cursor:pointer}
     animation:faceReveal 4.2s 4.1s both;
     z-index:2;
 }
+
+.face-placeholder img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
 .face-placeholder-inner{
     width:100%;
     height:100%;
@@ -434,14 +442,27 @@ img{max-width:100%}
      blinking stars + glowing blue text + staged fade-ins. -->
 <section id="intro">
     <div class="intro-copy">
-        <div class="intro-line line-one">amongst all the stars,</div>
-        <div class="intro-line line-two">somehow I found you.</div>
+
+        <div class="intro-line line-one">
+            amongst all the stars,
+        </div>
+
+        <div class="intro-line line-two">
+            somehow I found you.
+        </div>
+
         <div class="face-placeholder">
-  <div class="face-placeholder">
-    <img src="images/photo1.jpeg" alt="Her photo">
-   </div>
-        <div class="intro-line line-three">and I wanted to make you something.</div>
-        <button id="enterButton">open <span>♥</span></button>
+            <img src="images/photo1.jpeg" alt="Her photo">
+        </div>
+
+        <div class="intro-line line-three">
+            and I wanted to make you something.
+        </div>
+
+        <button id="enterButton">
+            open <span>♥</span>
+        </button>
+
     </div>
 </section>
 
@@ -455,10 +476,10 @@ img{max-width:100%}
 <section id="home" class="screen active">
     <div class="content home-content">
         <div class="hero-photo photo-frame">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMTAwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0iI2U4ZThlNSIvPgo8cmVjdCB4PSIyOCIgeT0iMjgiIHdpZHRoPSI3NDQiIGhlaWdodD0iOTQ0IiByeD0iMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2M5YzljNSIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjQwMCIgeT0iNDcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiM3NzciPlBIT1RPIDE8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iNTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5OTkiPnJlcGxhY2Ugd2l0aCB5b3VyIGltYWdlPC90ZXh0Pgo8L3N2Zz4=" alt="Main photo placeholder">
+            <img src="images/photo1.jpeg" alt="Main photo">
             <span class="photo-number">01</span>
         </div>
-
+        
         <div class="eyebrow">A LITTLE CORNER OF THE INTERNET</div>
         <h1>For you.</h1>
         <p class="intro-text">A little place for the things I wanted you to keep.</p>
