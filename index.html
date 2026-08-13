@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="images/favicon.png">
+<title>For You · Aziz</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+:root{
+    --cream:#FAF9F6;
+    --ink:#121212;
+    --muted:#777;
+    --blue:#2d2dff;
+    --white:#fff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{
+    min-height:100%;
+    background:var(--cream);
+    color:#242526;
+    font-family:'Lato',sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+    cursor:url('./images/pointer.png'),auto;
+}
+
+button,a{cursor:url('./images/pointer.png'),pointer}
+
+#starfield{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1001;
+    pointer-events:none;
+    opacity:1;
+    transition:opacity .8s ease;
+}
+#starfield.stars-off{opacity:0}
+
+.grain{
+    position:fixed;
+    inset:0;
+    z-index:50;
+    pointer-events:none;
+    opacity:.035;
+    background-image:radial-gradient(#000 .7px,transparent .7px);
+    background-size:5px 5px;
+}
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    background:#050505;
+    color:#fff;
+    transition:opacity 1s ease,visibility 1s ease;
+}
+#intro.hide{opacity:0;visibility:hidden}
+
+.intro-copy{
+    width:min(900px,90vw);
+    position:relative;
+    min-height:270px;
+    display:grid;
+    place-items:center;
+}
+.intro-line{
+    position:absolute;
+    left:0;right:0;
+    font-size:clamp(1.15rem,3vw,2rem);
+    font-weight:400;
+    letter-spacing:.2px;
+    color:#fff;
+    text-shadow:0 0 10px rgba(255,255,255,.65), 0 0 24px rgba(255,255,255,.2);
+    opacity:0;
+}
+.line-one{animation:story 4.2s .2s both}
+.face-placeholder{
+    position:absolute;
+    top:-105px;
+    left:50%;
+    width:120px;
+    height:120px;
+    transform:translateX(-50%) scale(.92);
+    border-radius:50%;
+    overflow:hidden;
+    opacity:0;
+    background:linear-gradient(145deg,#333,#111);
+    border:2px solid rgba(255,255,255,.75);
+    box-shadow:0 0 30px rgba(255,255,255,.14), 0 0 70px rgba(255,255,255,.08);
+    animation:faceReveal 4.2s 4.1s both;
+    z-index:2;
+}
+.face-placeholder-inner{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    color:#fff;
+    text-align:center;
+    font-weight:700;
+}
+.face-placeholder-inner span{
+    font-size:14px;
+    letter-spacing:2px;
+}
+.face-placeholder-inner small{
+    font-size:9px;
+    letter-spacing:1px;
+    opacity:.6;
+}
+@keyframes faceReveal{
+    0%{opacity:0;transform:translateX(-50%) scale(.8)}
+    18%,72%{opacity:1;transform:translateX(-50%) scale(1)}
+    100%{opacity:0;transform:translateX(-50%) scale(.96)}
+}
+
+.line-two{animation:story 4.2s 4.1s both}
+.line-three{animation:story 4.2s 8s both}
+
+@keyframes story{
+    0%{opacity:0;transform:translateY(10px)}
+    20%,72%{opacity:1;transform:none}
+    100%{opacity:0;transform:translateY(-10px)}
+}
+
+#enterButton{
+    position:absolute;
+    top:185px;
+    border:2px solid var(--blue);
+    background:var(--blue);
+    color:#fff;
+    border-radius:12px;
+    padding:13px 25px;
+    font:700 1rem 'Lato',sans-serif;
+    box-shadow:0 0 18px rgba(45,45,255,.35);
+    opacity:1;
+    transition:.25s;
+}
+#enterButton:hover{transform:translateY(-3px);box-shadow:0 0 28px rgba(45,45,255,.55)}
+#enterButton span{margin-left:4px}
+
+#tabs{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    width:95%;
+    z-index:200;
+}
+#tabs button{
+    border:none;
+    background:#fff;
+    color:#444;
+    padding:12px 22px;
+    border-radius:999px;
+    font:700 clamp(.85rem,2vw,1rem) 'Lato',sans-serif;
+    transition:.2s;
+    box-shadow:0 5px 18px rgba(0,0,0,.04);
+}
+#tabs button.active{background:#121212;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+#tabs button:hover{transform:translateY(-2px)}
+
+.screen{
+    min-height:100vh;
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:105px 24px 100px;
+    position:relative;
+    z-index:2;
+}
+.screen.active{display:flex}
+.content{width:min(900px,94vw);text-align:center}
+
+.eyebrow{
+    font-size:.75rem;
+    font-weight:900;
+    letter-spacing:4px;
+    color:#777;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+h1,h2{
+    color:#121212;
+    font-weight:900;
+    line-height:1;
+}
+h1{font-size:clamp(2.7rem,8vw,6rem);margin-bottom:18px}
+h2{font-size:clamp(2.4rem,6vw,4.8rem);margin-bottom:18px}
+.intro-text{
+    font-size:1.1rem;
+    line-height:1.65;
+    color:#666;
+    max-width:700px;
+    margin:0 auto 28px;
+}
+
+.home-content{padding-top:15px}
+.photo-frame{
+    background:#e8e8e5;
+    border:1px solid #d5d5d1;
+    position:relative;
+    overflow:hidden;
+}
+.hero-photo{
+    width:min(390px,78vw);
+    aspect-ratio:4/5;
+    margin:0 auto 36px;
+    border-radius:24px;
+    box-shadow:0 30px 80px rgba(0,0,0,.12);
+    animation:photoFloat 5s ease-in-out infinite;
+}
+.photo-frame img{display:block;width:100%;height:100%;object-fit:cover}
+@keyframes photoFloat{
+    0%,100%{transform:translateY(0) rotate(-.3deg)}
+    50%{transform:translateY(-7px) rotate(.3deg)}
+}
+.photo-number{
+    position:absolute;
+    bottom:13px;
+    right:15px;
+    color:#fff;
+    background:rgba(0,0,0,.42);
+    padding:5px 8px;
+    border-radius:99px;
+    font-size:.65rem;
+    letter-spacing:2px;
+}
+
+.letter-card{
+    max-width:760px;
+    margin:35px auto 45px;
+    padding:clamp(28px,6vw,65px);
+    background:rgba(255,255,255,.94);
+    border:1px solid #eee;
+    border-radius:24px;
+    box-shadow:0 25px 80px rgba(0,0,0,.07);
+    text-align:left;
+    font-size:1.08rem;
+    line-height:1.85;
+    animation:cardIn .9s ease both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.card-label{text-align:center;color:#888;font-size:.72rem;letter-spacing:4px;font-weight:900;margin-bottom:28px}
+.letter-card p{margin-bottom:21px}
+.signature{font-weight:900;margin-top:32px}
+
+.scroll-cue,.superman-trigger{
+    border:1px solid #ddd;
+    background:#fff;
+    color:#333;
+    border-radius:999px;
+    padding:11px 19px;
+    font:700 .85rem 'Lato',sans-serif;
+    transition:.25s;
+}
+.scroll-cue:hover,.superman-trigger:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,.08)}
+
+.memory-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+    margin:45px auto 30px;
+}
+.memory-card{
+    margin:0;
+    background:#fff;
+    padding:14px;
+    border:1px solid #eee;
+    box-shadow:0 15px 40px rgba(0,0,0,.07);
+    transition:.45s;
+}
+.memory-card:nth-child(odd){transform:rotate(-1deg)}
+.memory-card:nth-child(even){transform:translateY(25px) rotate(1deg)}
+.memory-card:hover{transform:translateY(-8px) rotate(0);box-shadow:0 25px 60px rgba(0,0,0,.12)}
+.memory-card .photo-frame{aspect-ratio:4/3}
+.memory-card figcaption{text-align:center;padding:14px 5px 5px;color:#777;font-size:.9rem}
+
+.cubes-content{padding-top:25px}
+.big-heart{
+    color:var(--blue);
+    font-size:clamp(5rem,15vw,9rem);
+    line-height:.8;
+    filter:drop-shadow(0 0 12px rgba(45,45,255,.3));
+    animation:heartFloat 3s ease-in-out infinite;
+    margin-bottom:28px;
+}
+@keyframes heartFloat{
+    0%,100%{transform:translateY(0) rotate(-3deg)}
+    50%{transform:translateY(-10px) rotate(3deg)}
+}
+.personal-cubes{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:18px;
+    margin:45px auto 28px;
+}
+.personal-cube{
+    border:0;
+    background:#fff;
+    width:78px;
+    height:78px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    color:var(--blue);
+    font-size:2.4rem;
+    cursor:pointer;
+    transition:.35s;
+}
+.personal-cube:hover{transform:translateY(-10px) rotate(5deg);box-shadow:0 20px 35px rgba(0,0,0,.12)}
+.personal-cube.pop{animation:cubePop .55s ease}
+@keyframes cubePop{50%{transform:scale(1.3) rotate(-8deg)}}
+#cubeReveal{
+    max-width:620px;
+    min-height:90px;
+    margin:0 auto 35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#555;
+    font-size:1.12rem;
+    line-height:1.6;
+    padding:20px;
+}
+
+#supermanOverlay{
+    position:fixed;
+    inset:0;
+    z-index:900;
+    background:#050505;
+    color:#fff;
+    display:none;
+    place-items:center;
+    text-align:center;
+}
+#supermanOverlay.show{display:grid;animation:overlayIn .6s ease}
+.superman-text{display:flex;flex-direction:column;gap:20px;padding:30px}
+.superman-text span{color:var(--blue);font-size:1rem;letter-spacing:4px;text-transform:uppercase;text-shadow:0 0 8px rgba(45,45,255,.9)}
+.superman-text strong{font-size:clamp(2rem,6vw,5rem);line-height:1.05}
+.superman-text small{font-size:3rem;color:var(--blue);animation:heartFloat 2s infinite}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+
+footer{
+    position:fixed;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+    z-index:150;
+    pointer-events:none;
+    font-size:.72rem;
+    letter-spacing:3px;
+    color:#242526;
+    opacity:.45;
+}
+
+@media(max-width:700px){
+    .screen{padding:95px 16px 85px}
+    .memory-grid{grid-template-columns:1fr}
+    .memory-card:nth-child(even),.memory-card:nth-child(odd){transform:none}
+    .letter-card{font-size:1rem}
+    .intro-copy{min-height:300px}
+    #enterButton{top:205px}
+}
+
+/* Reliability / local-preview fixes */
+.screen{box-sizing:border-box}
+#home.screen.active,#memories.screen.active,#cubes.screen.active{display:flex}
+img{max-width:100%}
+
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="grain"></div>
+
+<!-- Intro inspired by the uploaded Valentine site:
+     blinking stars + glowing blue text + staged fade-ins. -->
+<section id="intro">
+    <div class="intro-copy">
+        <div class="intro-line line-one">amongst all the stars,</div>
+        <div class="intro-line line-two">somehow I found you.</div>
+        <div class="face-placeholder">
+            <div class="face-placeholder-inner">
+                <span>HER PHOTO</span>
+                <small>replace with her face</small>
+            </div>
+        </div>
+        <div class="intro-line line-three">and I wanted to make you something.</div>
+        <button id="enterButton">open <span>♥</span></button>
+    </div>
+</section>
+
+<nav id="tabs">
+    <button class="active" data-screen="home">For You</button>
+    <button data-screen="memories">Little Things</button>
+    <button data-screen="cubes">Sugar Cubes</button>
+</nav>
+
+<main>
+<section id="home" class="screen active">
+    <div class="content home-content">
+        <div class="hero-photo photo-frame">
+            <img src="images/photo1.svg" alt="Main photo placeholder">
+            <span class="photo-number">01</span>
+        </div>
+
+        <div class="eyebrow">A LITTLE CORNER OF THE INTERNET</div>
+        <h1>For you.</h1>
+        <p class="intro-text">A little place for the things I wanted you to keep.</p>
+
+        <article class="letter-card">
+            <div class="card-label">A MESSAGE</div>
+            <p>Hey you,</p>
+            <p>I don't really know how to put all of this into one little message, but I wanted to try anyway.</p>
+            <p>There are some people who make ordinary moments feel a little less ordinary. I think you're one of those people. It's the little things — the conversations, the stupid jokes, and the moments where we're not really doing anything at all — that I end up remembering.</p>
+            <p>I like being around you. I like how comfortable it can feel, even when neither of us is saying much. And honestly, I'm glad that somewhere along the way, we became <em>us</em>, whatever exactly that means.</p>
+            <p>I don't want to make this overly dramatic. I just wanted you to know that I appreciate you, probably more than I say out loud.</p>
+            <p>So I made this little corner of the internet for you. You can come back to it whenever you want.</p>
+            <p>Take care of yourself, okay?</p>
+            <p class="signature">— Aziz</p>
+        </article>
+
+        <button class="scroll-cue" data-screen="memories">↓ little things I remember</button>
+    </div>
+</section>
+
+<section id="memories" class="screen">
+    <div class="content">
+        <div class="eyebrow">LITTLE THINGS I REMEMBER</div>
+        <h2>Moments worth keeping.</h2>
+        <p class="intro-text">Seven little places for seven photos.</p>
+
+        <div class="memory-grid">
+            <figure class="memory-card"><div class="photo-frame"><img src="images/photo2.svg" alt="Photo 2 placeholder"></div><figcaption>one of those little moments.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="images/photo3.svg" alt="Photo 3 placeholder"></div><figcaption>something worth keeping.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="images/photo4.svg" alt="Photo 4 placeholder"></div><figcaption>another memory.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="images/photo5.svg" alt="Photo 5 placeholder"></div><figcaption>this one makes me smile.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="images/photo6.svg" alt="Photo 6 placeholder"></div><figcaption>just because.</figcaption></figure>
+            <figure class="memory-card"><div class="photo-frame"><img src="images/photo7.svg" alt="Photo 7 placeholder"></div><figcaption>one more for the collection.</figcaption></figure>
+        </div>
+    </div>
+</section>
+
+<section id="cubes" class="screen">
+    <div class="content cubes-content">
+        <div class="big-heart" aria-hidden="true">♥</div>
+        <div class="eyebrow">A DIGITAL ENVELOPE</div>
+        <h2>Pick a Sugar Cube.</h2>
+        <p class="intro-text">There are a few things I wanted you to know.</p>
+
+        <div class="personal-cubes">
+            <button class="personal-cube" data-message="I really like the way you make ordinary days feel different.">♥</button>
+            <button class="personal-cube" data-message="You are one of those people I am genuinely glad I met.">♥</button>
+            <button class="personal-cube" data-message="I hope you know that your presence matters to me.">♥</button>
+            <button class="personal-cube" data-message="Some memories are small, but somehow they stay with you.">♥</button>
+            <button class="personal-cube" data-message="I made an entire website because apparently one message wasn't enough.">♥</button>
+        </div>
+
+        <div id="cubeReveal">Click one.</div>
+
+        <button class="superman-trigger" id="supermanTrigger">need a hand? ↑</button>
+    </div>
+</section>
+</main>
+
+<div id="supermanOverlay">
+    <div class="superman-text">
+        <span>up, up and away.</span>
+        <strong>Your personal Superman is on duty.</strong>
+        <small>♥</small>
+    </div>
+</div>
+
+<footer>Aziz · Your Personal Superman &lt;3</footer>
+
+<script>
+const canvas = document.getElementById("starfield");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+const STAR_COUNT = 750;
+const starColors = [0, 0, 0, 220, 240];
+
+function resizeCanvas(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = innerWidth * dpr;
+    canvas.height = innerHeight * dpr;
+    canvas.style.width = innerWidth + "px";
+    canvas.style.height = innerHeight + "px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    stars = Array.from({length:STAR_COUNT}, () => ({
+        x:Math.random()*innerWidth,
+        y:Math.random()*innerHeight,
+        radius:Math.random() < .9 ? Math.random()*1.05 + .25 : Math.random()*2 + 1,
+        hue:starColors[Math.floor(Math.random()*starColors.length)],
+        sat:Math.random() < .7 ? 0 : 35+Math.random()*65,
+        opacity:.35+Math.random()*.65,
+        twinkle:Math.random()*Math.PI*2,
+        speed:.008+Math.random()*.025
+    }));
+}
+resizeCanvas();
+addEventListener("resize",resizeCanvas);
+
+function drawStars(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    for(const star of stars){
+        star.twinkle += star.speed;
+        const pulse = .72 + Math.sin(star.twinkle) * .28;
+        const alpha = Math.max(.08, Math.min(1, star.opacity * pulse));
+
+        ctx.beginPath();
+        ctx.arc(star.x,star.y,star.radius,0,Math.PI*2);
+        ctx.fillStyle=`hsla(${star.hue},${star.sat}%,96%,${alpha})`;
+        ctx.fill();
+
+        if(star.radius > 1.35){
+            ctx.beginPath();
+            ctx.arc(star.x,star.y,star.radius*3.2,0,Math.PI*2);
+            ctx.fillStyle=`hsla(${star.hue},${star.sat}%,96%,${alpha*.08})`;
+            ctx.fill();
+        }
+    }
+    requestAnimationFrame(drawStars);
+}
+drawStars();
+
+const intro = document.getElementById("intro");
+const enterButton = document.getElementById("enterButton");
+
+enterButton.addEventListener("click",()=>{
+    intro.classList.add("hide");
+    canvas.classList.add("stars-off");
+    document.body.classList.add("opened");
+    setTimeout(()=>showScreen("home"),350);
+});
+
+const tabs = document.querySelectorAll("#tabs button");
+const screens = document.querySelectorAll(".screen");
+
+function showScreen(name){
+    screens.forEach(s=>s.classList.toggle("active",s.id===name));
+    tabs.forEach(t=>t.classList.toggle("active",t.dataset.screen===name));
+    window.scrollTo({top:0,behavior:"smooth"});
+}
+
+tabs.forEach(tab=>tab.addEventListener("click",()=>showScreen(tab.dataset.screen)));
+document.querySelectorAll("[data-screen]").forEach(el=>{
+    if(!el.matches("#tabs button")) el.addEventListener("click",()=>showScreen(el.dataset.screen));
+});
+
+document.querySelectorAll(".personal-cube").forEach(cube=>{
+    cube.addEventListener("click",()=>{
+        document.querySelectorAll(".personal-cube").forEach(c=>c.classList.remove("pop"));
+        cube.classList.add("pop");
+        const reveal=document.getElementById("cubeReveal");
+        reveal.animate(
+            [{opacity:0,transform:"translateY(10px)"},{opacity:1,transform:"translateY(0)"}],
+            {duration:450,easing:"ease-out"}
+        );
+        reveal.textContent=cube.dataset.message;
+    });
+});
+
+document.getElementById("supermanTrigger").addEventListener("click",()=>{
+    const overlay=document.getElementById("supermanOverlay");
+    overlay.classList.add("show");
+    setTimeout(()=>overlay.addEventListener("click",()=>overlay.classList.remove("show"),{once:true}),300);
+});
+
+</script>
+</body>
+</html>
