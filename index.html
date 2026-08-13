@@ -431,6 +431,71 @@ img{max-width:100%}
     }
 }
 
+
+/* Click-to-preview for Little Things photos */
+.memory-card { cursor: zoom-in; }
+.memory-card .photo-frame img {
+    transition: transform .3s ease;
+}
+.memory-card:hover .photo-frame img {
+    transform: scale(1.025);
+}
+
+/* Full-screen photo preview */
+#photoModal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+#photoModal.show {
+    display: flex;
+    animation: photoModalIn .2s ease both;
+}
+#photoModalBackdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.88);
+    backdrop-filter: blur(7px);
+}
+#photoModalImage {
+    position: relative;
+    z-index: 2;
+    max-width: 94vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 30px 100px rgba(0,0,0,.5);
+}
+#photoModalClose {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    z-index: 3;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    background: rgba(255,255,255,.1);
+    color: #fff;
+    font: 300 32px/44px Arial,sans-serif;
+    cursor: pointer;
+    transition: .2s;
+}
+#photoModalClose:hover {
+    background: rgba(255,255,255,.22);
+    transform: scale(1.06);
+}
+@keyframes photoModalIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 </style>
 </head>
 <body>
@@ -631,6 +696,13 @@ img{max-width:100%}
 </section>
 </main>
 
+
+<div id="photoModal" aria-hidden="true">
+    <div id="photoModalBackdrop"></div>
+    <button id="photoModalClose" aria-label="Close photo preview">&times;</button>
+    <img id="photoModalImage" src="" alt="Full photo preview">
+</div>
+
 <div id="supermanOverlay">
     <div class="superman-text">
         <span>up, up and away.</span>
@@ -734,6 +806,39 @@ document.getElementById("supermanTrigger").addEventListener("click",()=>{
     const overlay=document.getElementById("supermanOverlay");
     overlay.classList.add("show");
     setTimeout(()=>overlay.addEventListener("click",()=>overlay.classList.remove("show"),{once:true}),300);
+});
+
+
+// Little Things: click a photo to view it full-screen.
+const photoModal = document.getElementById("photoModal");
+const photoModalImage = document.getElementById("photoModalImage");
+const photoModalClose = document.getElementById("photoModalClose");
+const photoModalBackdrop = document.getElementById("photoModalBackdrop");
+
+document.querySelectorAll(".memory-card .photo-frame img").forEach(img => {
+    img.addEventListener("click", () => {
+        photoModalImage.src = img.src;
+        photoModalImage.alt = img.alt || "Full photo preview";
+        photoModal.classList.add("show");
+        photoModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    });
+});
+
+function closePhotoModal() {
+    photoModal.classList.remove("show");
+    photoModal.setAttribute("aria-hidden", "true");
+    photoModalImage.src = "";
+    document.body.style.overflow = "";
+}
+
+photoModalClose.addEventListener("click", closePhotoModal);
+photoModalBackdrop.addEventListener("click", closePhotoModal);
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && photoModal.classList.contains("show")) {
+        closePhotoModal();
+    }
 });
 
 </script>
